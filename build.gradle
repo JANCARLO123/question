@@ -13,7 +13,7 @@ buildscript {
 }
 
 apply plugin: 'java'
-apply plugin: 'eclipse'
+apply plugin: 'idea'
 apply plugin: 'org.springframework.boot'
 apply plugin: 'io.spring.dependency-management'
 
@@ -31,15 +31,35 @@ repositories {
 dependencies {
 	compileOnly('org.projectlombok:lombok:1.16.18')
   	compile('org.springframework.boot:spring-boot-starter')
-  	compile('org.springframework.boot:spring-boot-starter-web')
+	compile('org.springframework.boot:spring-boot-starter-web')
+	compile('org.springframework.boot:spring-boot-starter-thymeleaf')
   	compile('org.springframework.boot:spring-boot-starter-data-jpa')
 
-	compileOnly('org.webjars:jquery:3.2.0')
+	compile('org.webjars:jquery:3.2.0')
 	compileOnly('org.webjars:jquery-ui:1.12.1')
-	compileOnly('org.webjars:bootstrap:4.0.0-beta.2')
-	compileOnly('org.webjars:d3js:4.10.2')
+	compile('org.webjars:bootstrap:4.0.0-beta.2')
+	compile('org.webjars:d3js:4.10.2')
 	compile('org.liquibase:liquibase-core')
   	runtime('org.postgresql:postgresql:42.1.4')
     testCompile('org.springframework.boot:spring-boot-starter-test')
 
+	ext["thymeleaf.version"] = "3.0.9.RELEASE"
+	ext["thymeleaf-layout-dialect.version"] = "2.2.2"
+
+}
+
+bootRun {
+	// Use Spring Boot DevTool only when we run Gradle bootRun task
+	//classpath = sourceSets.main.runtimeClasspath + configurations.dev
+}
+
+springBoot {
+	buildInfo {
+		properties {
+			artifact = 'example-app'
+			version = '1.2.3'
+			group = 'com.example'
+			name = 'Example application'
+		}
+	}
 }
