@@ -19,7 +19,7 @@ public class Exam {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     @NotNull
-    private String titile;
+    private String title;
     @NotNull
     private String description;
 

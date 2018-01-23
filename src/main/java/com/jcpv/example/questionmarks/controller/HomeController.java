@@ -1,5 +1,6 @@
 package com.jcpv.example.questionmarks.controller;
-
+;
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -10,11 +11,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * Created by jancarlo on 10/01/18.
  */
 
-//@Log
+@Slf4j
 @Controller
 public class HomeController {
 
-    private static final Logger log = LoggerFactory.getLogger(HomeController.class);
+    //private static final Logger log = LoggerFactory.getLogger(HomeController.class);
     @Value("${messages.home:default-value}")
     private String message = "Hello World";
 
