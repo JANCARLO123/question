@@ -14,7 +14,7 @@ import javax.validation.constraints.NotNull;
 
 @Data
 @Entity
-public class Exam {
+    public class Exam {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;

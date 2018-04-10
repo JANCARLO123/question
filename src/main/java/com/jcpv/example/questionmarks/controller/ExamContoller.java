@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Created by jancarlo on 19/01/18.
@@ -25,10 +26,12 @@ public class ExamContoller {
     private JmsSender jmsSender;
 
     @GetMapping("exams")
-    public ResponseEntity<List<Exam>> getAllArticles() {
+    public ResponseEntity<List<Exam>> getAllArticles() throws InterruptedException {
        List<Exam> examns = examService.getExams();
         for(Exam exam : examns){
             jmsSender.send(exam);
+            jmsSender.send("name-queue2",exam);
+            TimeUnit.SECONDS.sleep(3);
         }
         return new ResponseEntity<List<Exam>>(examService.getExams(), HttpStatus.OK);
     }
